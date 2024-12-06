@@ -11,6 +11,8 @@
 
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
 
+      #nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages );
+
       packages = forAllSystems (system: { default = import ./default.nix { pkgs = nixpkgsFor.${system}; }; });
   in {
     inherit packages;
