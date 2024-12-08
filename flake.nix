@@ -21,6 +21,10 @@
         options.programs = {
           ataraxy-discord-bot = {
             enable = lib.mkEnableOption "enables ataraxy discord bot";
+            envFilePath = lib.mkOption {
+              type = lib.types.str;
+              description = "Environment file to be passed to the systemd service";
+            };
           };
         };
 
@@ -35,8 +39,7 @@
 
             serviceConfig = {
               ExecStart = "${pkg}/bin/ataraxy ";
-              EnvironmentFile =
-                config.sops.secrets.ataraxy_environment_file.path;
+              EnvironmentFile = config.programs.ataraxy-discord-bot.envFilePath;
               Restart = "on-failure";
               TimeoutStartSec = 5;
               RestartSec = 2;
