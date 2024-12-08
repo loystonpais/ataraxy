@@ -17,7 +17,7 @@
         default = import ./shell.nix { pkgs = nixpkgsFor.${system}; };
       });
 
-      nixosModules.default = { config, lib, pkgs }: {
+      nixosModules.default = { config, lib, pkgs, ... }: {
         options.programs = {
           ataraxy-discord-bot = {
             enable = lib.mkEnableOption "enables ataraxy discord bot";
