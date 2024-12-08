@@ -1,6 +1,6 @@
 [package]
-name = "ataraxy"
-version = "0.1.0"
+name = "ataraxy-discord-bot"
+version = "0.0.0-test"
 edition = "2021"
 
 [dependencies]
