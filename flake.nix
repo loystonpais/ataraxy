@@ -33,12 +33,13 @@
           let 
             system = builtins.currentSystem;
             pkg = pkgs.callPackage ./default.nix { inherit pkgs; };
+            name = (fromTOML ( builtins.readFile ./Cargo.toml )).package.name;
           in
           {
             enable = true;
 
             serviceConfig = {
-              ExecStart = "${pkg}/bin/ataraxy ";
+              ExecStart = "${pkg}/bin/${name}";
               EnvironmentFile = config.programs.ataraxy-discord-bot.envFilePath;
               Restart = "on-failure";
               TimeoutStartSec = 5;
