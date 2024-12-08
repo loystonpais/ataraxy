@@ -1,15 +1,12 @@
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
-  buildInputs = [
-    pkgs.gcc
+  buildInputs = with pkgs; [
+    gcc
+    rustc
+    cargo
+    rustup
   ];
 
   nativeBuildInputs = with pkgs.buildPackages; [ gcc ];
-
-  CC="gcc";
-
-  shellHook = ''
-  export PATH="$PATH":~/.cargo/bin
-  '';
 }
