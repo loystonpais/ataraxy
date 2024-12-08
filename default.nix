@@ -1,7 +1,15 @@
 { pkgs ? import <nixpkgs> { } }:
+with builtins;
+let 
+  cargoToml = fromTOML ( readFile ./Cargo.toml );
+
+  pname = cargoToml.package.name;
+  version = cargoToml.package.version;
+  
+in
 pkgs.pkgsStatic.rustPlatform.buildRustPackage rec {
-  pname = "ataraxy";
-  version = "v0.0.0.pre-alpha";
+  inherit pname version;
+  
   cargoLock.lockFile = ./Cargo.lock;
   src = pkgs.lib.cleanSource ./.;
 }
