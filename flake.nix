@@ -33,7 +33,7 @@
           let 
             system = builtins.currentSystem;
             pkg = pkgs.callPackage ./default.nix { inherit pkgs; };
-            name = (fromTOML ( builtins.readFile ./Cargo.toml )).package.name;
+            name = (fromTOML ( builtins.readFile ./bot/Cargo.toml )).package.name;
           in
           {
             enable = true;
