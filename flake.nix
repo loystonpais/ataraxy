@@ -18,7 +18,7 @@
       });
 
       nixosModules.default = { config, lib, pkgs, ... }: {
-        options.programs = {
+        options.services = {
           ataraxy-discord-bot = {
             enable = lib.mkEnableOption "enables ataraxy discord bot";
             envFilePath = lib.mkOption {
@@ -28,7 +28,7 @@
           };
         };
 
-        config = lib.mkIf config.programs.ataraxy-discord-bot.enable {
+        config = lib.mkIf config.services.ataraxy-discord-bot.enable {
           systemd.services.ataraxy-discord-bot = 
           let 
             system = builtins.currentSystem;
@@ -40,7 +40,7 @@
 
             serviceConfig = {
               ExecStart = "${pkg}/bin/${name}";
-              EnvironmentFile = config.programs.ataraxy-discord-bot.envFilePath;
+              EnvironmentFile = config.services.ataraxy-discord-bot.envFilePath;
               Restart = "on-failure";
               TimeoutStartSec = 5;
               RestartSec = 2;
